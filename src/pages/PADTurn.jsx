@@ -111,7 +111,7 @@ const PADTurn = () => {
   const startCamera = async () => {
     try {
       const userStream = await navigator.mediaDevices.getUserMedia({ 
-        video: { facingMode: "environment", width: { ideal: window.innerWidth }, height: { ideal: window.innerHeight } }
+        video: { facingMode: "user", width: { ideal: window.innerWidth }, height: { ideal: window.innerHeight } }
       });
       videoRef.current.srcObject = userStream;
       setStream(userStream);
