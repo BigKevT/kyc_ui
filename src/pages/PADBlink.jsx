@@ -32,21 +32,21 @@ const PADBlink = () => {
         position: "absolute",
         top: "35%",
         transform: "translateY(-50%)", // Ensures proper centering
-        width: "260px",
-        height: "260px",
+        width: "310px",
+        height: "310px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       },
       svgProgress: {
         position: "absolute",
-        width: "270px",
-        height: "270px",
+        width: "320px",
+        height: "320px",
         transition: "stroke-dashoffset 0.5s linear", // Ensure smooth progress bar animation
       },
       circleWrapper: {
-        width: "250px",
-        height: "250px",
+        width: "300px",
+        height: "300px",
         borderRadius: "50%",
         border: "4px solid grey",
         overflow: "hidden",
@@ -82,7 +82,7 @@ const PADBlink = () => {
       },
       startButtonContainer: {
         position: "absolute",
-        bottom: "10%",
+        bottom: "15%",
         width: "100%",
         textAlign: "center",
       },

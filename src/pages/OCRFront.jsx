@@ -40,7 +40,7 @@ const OCRFront = ({ arg }) => {
     }
   };
 
-  const style = {
+  const styles = {
     container : {
         position: "fixed",
         top: "0",
@@ -100,22 +100,22 @@ const OCRFront = ({ arg }) => {
   };
 
   return (
-    <div style={style.container}>
-      <div style={style.hintTextAbove}>
+    <div style={styles.container}>
+      <div style={styles.hintTextAbove}>
         <p>在框線內完整拍攝身分證 {arg} </p>
       </div>
-      <div style={style.videoWrapper}>
-        <video ref={videoRef} autoPlay playsInline style={style.video} />
+      <div style={styles.videoWrapper}>
+        <video ref={videoRef} autoPlay playsInline style={styles.video} />
       </div>
       
       {/* Hint Text Below Camera View */}
-      <div style={style.hintTextBelow}>
+      <div style={styles.hintTextBelow}>
         <p>畫面模擬身分證 對準鏡頭</p>
         <p>光線保持明亮 | 避免文字反光</p>
       </div>
       
       {/* Capture button */}
-      <button style={style.button} onClick={handleCapture}></button>
+      <button style={styles.button} onClick={handleCapture}></button>
       <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
     </div>
   );

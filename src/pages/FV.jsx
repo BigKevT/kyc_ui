@@ -10,6 +10,15 @@ const FV = () => {
     const [isCapturing, setIsCapturing] = useState(false);
     const [showPreview, setShowPreview] = useState(true);
 
+    useEffect(() => {
+      // Hide preview image after 1 second
+      const timer = setTimeout(() => {
+        setShowPreview(false);
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }, []);
+
     const styles = {
       container: {
         position: "fixed",
@@ -28,15 +37,15 @@ const FV = () => {
         position: "absolute",
         top: "35%",
         transform: "translateY(-50%)", // Ensures proper centering
-        width: "260px",
-        height: "260px",
+        width: "310px",
+        height: "310px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       },
       circleWrapper: {
-        width: "250px",
-        height: "250px",
+        width: "300px",
+        height: "300px",
         borderRadius: "50%",
         border: "4px solid grey",
         overflow: "hidden",
@@ -72,7 +81,7 @@ const FV = () => {
       },
       startButtonContainer: {
         position: "absolute",
-        bottom: "10%",
+        bottom: "15%",
         width: "100%",
         textAlign: "center",
       },
@@ -112,7 +121,6 @@ const FV = () => {
   }, []);
 
   const startCapturing = () => {
-    setShowPreview(false);
     setIsCapturing(true);
     console.log("image captured");
     
@@ -156,7 +164,7 @@ const FV = () => {
       <div style={styles.startButtonContainer}>
         {!isCapturing && (
           <button style={styles.startButton} onClick={startCapturing}>
-            Start Capturing
+            拍攝照片
           </button>
         )}
       </div>

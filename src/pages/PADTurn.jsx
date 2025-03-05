@@ -9,7 +9,11 @@ const PADTurn = () => {
     const [stream, setStream] = useState(null);
     const [isCapturing, setIsCapturing] = useState(false);
     const [showPreview, setShowPreview] = useState(true);
-    const [hintText, setHintText] = useState("請完整地將您的臉放在圓框內 \n 請勿遮擋臉部");
+    const [hintText, setHintText] = useState([
+      "請完整地將您的臉放在圓框內",
+      <br key="break" />,
+      "請勿遮擋臉部",
+    ]);
     const [progress, setProgress] = useState(0);
     const totalPhotos = 10;
     const captureDuration = 5000; // 5 seconds
@@ -32,21 +36,21 @@ const PADTurn = () => {
         position: "absolute",
         top: "35%",
         transform: "translateY(-50%)", // Ensures proper centering
-        width: "260px",
-        height: "260px",
+        width: "310px",
+        height: "310px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       },
       svgProgress: {
         position: "absolute",
-        width: "270px",
-        height: "270px",
+        width: "320px",
+        height: "320px",
         transition: "stroke-dashoffset 0.5s linear", // Ensure smooth progress bar animation
       },
       circleWrapper: {
-        width: "250px",
-        height: "250px",
+        width: "300px",
+        height: "300px",
         borderRadius: "50%",
         border: "4px solid grey",
         overflow: "hidden",
@@ -79,10 +83,11 @@ const PADTurn = () => {
         color: "black",
         fontSize: "1.5rem",
         lineHeight: "1.5",
+        padding: "15px"
       },
       startButtonContainer: {
         position: "absolute",
-        bottom: "10%",
+        bottom: "15%",
         width: "100%",
         textAlign: "center",
       },
@@ -133,7 +138,11 @@ const PADTurn = () => {
   const startCapturing = async () => {
     setShowPreview(false);
     setIsCapturing(true);
-    setHintText("看一下左邊，再看一下右邊");
+    setHintText([
+      "請先看一下左邊",
+      <br key="break" />,
+      "再看一下右邊"
+    ])
     console.log("Starting camera...");
     await startCamera();
     console.log("Camera started and capturing in progress");
@@ -163,9 +172,9 @@ const PADTurn = () => {
       
       <div style={styles.circleWrapperContainer}>
         <svg style={styles.svgProgress}>
-          <circle cx="135" cy="135" r="125" stroke="lightgray" strokeWidth="10" fill="none" />
-          <circle cx="135" cy="135" r="125" stroke="orange" strokeWidth="10" fill="none" 
-            strokeDasharray="785" strokeDashoffset={`${785 - (progress / 100) * 785}`} 
+          <circle cx="160" cy="160" r="150" stroke="lightgray" strokeWidth="10" fill="none" />
+          <circle cx="160" cy="160" r="150" stroke="orange" strokeWidth="10" fill="none" 
+            strokeDasharray="945" strokeDashoffset={`${945 - (progress / 100) * 945}`} 
             strokeLinecap="round" />
         </svg>
         <div style={styles.circleWrapper}>
