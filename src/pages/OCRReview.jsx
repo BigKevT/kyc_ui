@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // ✅ Added missing import
+import { useNavigate, useLocation } from "react-router-dom"; 
 
 const OCRReview = () => {
-  const navigate = useNavigate(); // ✅ Fixed typo (navigete → navigate)
+  const navigate = useNavigate(); 
   const location = useLocation();
   const capturedImage = location.state?.image;
   
@@ -80,7 +80,7 @@ const OCRReview = () => {
         <button style={styles.buttonRetake} onClick={() => navigate(-1)}>重新拍攝</button>
         <button style={styles.buttonSend} onClick={() => {
           if (capturedImage) {
-            navigate("/FV");
+            navigate("/IDFD");
           } else {
             alert("請先拍攝照片");
           }

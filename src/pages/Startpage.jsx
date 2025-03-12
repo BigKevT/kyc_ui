@@ -68,7 +68,7 @@ const StartPage = () => {
       marginBottom: "10px",
     },
     checkbox: {
-      width: "22px", // Standardized checkbox size
+      width: "22px", 
       height: "22px",
       minWidth: "22px",
       minHeight: "22px",

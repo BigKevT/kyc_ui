@@ -16,7 +16,7 @@ const PADTurn = () => {
     ]);
     const [progress, setProgress] = useState(0);
     const totalPhotos = 10;
-    const captureDuration = 5000; // 5 seconds
+    const captureDuration = 5000; 
     
     const styles = {
       container: {
@@ -158,7 +158,7 @@ const PADTurn = () => {
         setHintText("拍攝完成");
         setProgress(100);
         setTimeout(() => {
-          navigate("/PADBlink"); // Navigate to next page after completion
+          navigate("/PADBlink"); 
         }, 1000); // Delay before navigating
       }
     }, captureDuration / totalPhotos);

@@ -149,7 +149,7 @@ const PADBlink = () => {
         setHintText("拍攝完成");
         setProgress(100);
         setTimeout(() => {
-          navigate("/Endpage"); // Navigate to next page after completion
+          navigate("/Endpage"); 
         }, 1000); // Delay before navigating
       }
     }, captureDuration / totalPhotos);
