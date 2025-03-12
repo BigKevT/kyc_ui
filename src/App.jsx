@@ -20,7 +20,7 @@ function App() {
         <Route path="Startpage" element={<StartPage />} />
         <Route path="/OCRFront" element={<OCRFront />} />
         <Route path="/OCRReview" element={<OCRReview />} />
-        <Route path="/IDFD" element={<IDFD />} />
+        <Route path="/IDFD" element={<IDFD arg={"左右"} />} />
         <Route path="/FV" element={<FV />} />
         <Route path="/FVReview" element={<FVReview />} />
         <Route path="/PADTurn" element={<PADTurn />} />

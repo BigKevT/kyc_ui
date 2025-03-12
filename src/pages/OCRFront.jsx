@@ -95,7 +95,7 @@ const OCRFront = ({ arg }) => {
         padding: "24px",
         borderRadius: "50%",
         boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-        cursor: "pointer" // ✅ Ensure it's clickable
+        cursor: "pointer" 
       },
   };
 

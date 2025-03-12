@@ -124,7 +124,7 @@ const IDFD = ({ arg }) => {
     return (
         <div style={styles.container}>
             <div style={styles.hintText}>
-                <p>請在框框線中向{arg}翻轉您的身分證</p>
+                <p>請在框線中向{arg}翻轉您的身分證</p>
             </div>
 
             {isCapturing && <IDAnimation />}
