@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import placeholder from "../assets/placeholder.jpg";
 
 const FV = () => {
@@ -9,6 +9,14 @@ const FV = () => {
     const [stream, setStream] = useState(null);
     const [isCapturing, setIsCapturing] = useState(false);
     const [showPreview, setShowPreview] = useState(true);
+    //use the same UUID
+    const location = useLocation();
+    const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
+
+    //check UUID in console
+    useEffect(() => {
+        console.log(`UUID: ${userUUID}`);
+    }, []) 
 
     useEffect(() => {
       // Hide preview image after 1 second

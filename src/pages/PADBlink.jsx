@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import FaceAnimation from "../components/FaceAnimation";
 
 const PADBlink = () => {
@@ -13,7 +13,15 @@ const PADBlink = () => {
     const [progress, setProgress] = useState(0);
     const totalPhotos = 10;
     const captureDuration = 5000; // 5 seconds
-    
+
+    //use the same UUID
+    const location = useLocation();
+    const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
+
+    //check UUID in console
+    useEffect(() => {
+        console.log(`UUID: ${userUUID}`);
+    }, []) 
     const styles = {
       container: {
         position: "fixed",

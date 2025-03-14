@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import idcardpng from "../assets/idcard.png";
 
@@ -6,6 +6,20 @@ const StartPage = () => {
   const navigate = useNavigate();
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
+  //assign UUID for visitor
+  const [userUUID] = useState(() => {
+    let storedUUID = sessionStorage.getItem('userUUID');
+    if (!storedUUID) {
+        storedUUID = crypto.randomUUID();
+        sessionStorage.setItem('userUUID', storedUUID);
+    }
+    return storedUUID;
+  });
+  
+
+  useEffect(() => {
+    console.log(`UUID: ${userUUID}`);
+  }, [])  
 
   const styles = {
     container: {

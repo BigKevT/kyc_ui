@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import FaceAnimation from "../components/FaceAnimation";
 
 const PADTurn = () => {
@@ -17,6 +17,15 @@ const PADTurn = () => {
     const [progress, setProgress] = useState(0);
     const totalPhotos = 10;
     const captureDuration = 5000; 
+
+    //use the same UUID
+    const location = useLocation();
+    const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
+
+    //check UUID in console
+    useEffect(() => {
+        console.log(`UUID: ${userUUID}`);
+    }, []) 
     
     const styles = {
       container: {

@@ -1,11 +1,20 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const OCRFront = ({ arg }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const navigate = useNavigate(); 
   const [stream, setStream] = useState(null);
+  //use the same UUID
+  const location = useLocation();
+  const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
+
+  //check UUID in console
+  useEffect(() => {
+    console.log(`UUID: ${userUUID}`);
+  }, []) 
+
 
   useEffect(() => {
     const startCamera = async () => {

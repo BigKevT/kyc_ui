@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const FVReview = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const capturedImage = location.state?.image;
+    //use the same UUID
+    const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
+
+    //check UUID in console
+    useEffect(() => {
+        console.log(`UUID: ${userUUID}`);
+    }, []) 
 
   const styles = {
     container: {

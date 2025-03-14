@@ -5,6 +5,13 @@ const OCRReview = () => {
   const navigate = useNavigate(); 
   const location = useLocation();
   const capturedImage = location.state?.image;
+  //use the same UUID
+  const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
+  
+  //check UUID in console
+  useEffect(() => {
+    console.log(`UUID: ${userUUID}`);
+  }, []) 
   
   const styles = {
     container: {

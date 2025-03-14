@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import IDAnimation from "../components/IDAnimation";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const IDFD = ({ arg }) => {
     const videoRef = useRef(null);
@@ -8,6 +8,15 @@ const IDFD = ({ arg }) => {
     const [capturedPhotos, setCapturedPhotos] = useState([]);
     const [isCapturing, setIsCapturing] = useState(false);
     const navigate = useNavigate();
+    //use the same UUID
+    const location = useLocation();
+    const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
+
+    //check UUID in console
+    useEffect(() => {
+        console.log(`UUID: ${userUUID}`);
+    }, []) 
+
 
     const styles = {
         container: {
