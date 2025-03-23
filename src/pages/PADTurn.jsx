@@ -8,6 +8,7 @@ const PADTurn = () => {
     const navigate = useNavigate();
     const [stream, setStream] = useState(null);
     const [isCapturing, setIsCapturing] = useState(false);
+    const [capturedPhotos, setCapturedPhotos] = useState([]);
     const [showPreview, setShowPreview] = useState(true);
     const [hintText, setHintText] = useState([
       "請完整地將您的臉放在圓框內",
@@ -157,7 +158,8 @@ const PADTurn = () => {
       canvasRef.current.width = videoRef.current.videoWidth;
       canvasRef.current.height = videoRef.current.videoHeight;
       context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
-      console.log(`Captured photo ${count + 1}/10`);
+      const imageData = canvasRef.current.toDataURL("image/png");
+      setCapturedPhotos(prev => [...prev, imageData]);
     }
   };
 
@@ -178,6 +180,7 @@ const PADTurn = () => {
       if (count < totalPhotos) {
         capturePhoto(count);
         setProgress((prev) => prev + (100 / totalPhotos));
+        console.log(`Captured photo ${count + 1}/10`);
         count++;
       } else {
         clearInterval(interval);
@@ -189,6 +192,13 @@ const PADTurn = () => {
       }
     }, captureDuration / totalPhotos);
   };
+
+  //check all captured photos
+  useEffect(() => {
+     if (capturedPhotos.length === 10) {
+         console.log("All captured photos:", capturedPhotos);
+     }
+  }, [capturedPhotos]); 
 
   return (
     <div style={styles.container}>

@@ -119,13 +119,20 @@ const PADBlink = () => {
             } else {
                 clearInterval(interval);
                 console.log("all set");
-                console.log(capturedPhotos);
                 navigate("/Endpage");
             }
         }, 1000);
 
         return () => clearInterval(interval);
     }, [isStarted]);
+
+    //check all captured photos
+    useEffect(() => {
+        if (capturedPhotos.length === 10) {
+            console.log("All captured photos:", capturedPhotos);
+        }
+    }, [capturedPhotos]);    
+
 
     const buttonAction = () => {
         setIsStarted(true);

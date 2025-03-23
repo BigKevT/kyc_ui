@@ -154,13 +154,17 @@ const IDFD = ({ arg }) => {
                 clearInterval(interval);
                 setIsCapturing(false);
                 console.log("all set")
-                console.log(capturedPhotos);
             }
         }, 1000);
 
         return () => clearInterval(interval);
     }, [isCapturing]);
 
+    useEffect(() => {
+        if (capturedPhotos.length === 10) {
+            console.log("All captured photos:", capturedPhotos);
+        }
+    }, [capturedPhotos]);
 
     // button function
     const buttonAction = () => {
