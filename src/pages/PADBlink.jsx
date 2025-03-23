@@ -1,3 +1,7 @@
+// 待加入function：
+// 1. 照片要傳到middleEnd
+// 2. middleEnd回傳true/ false要可以終止這個Blink流程
+
 import React, { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BlinkEyes from "../components/animation/BlinkEyes";

@@ -1,3 +1,7 @@
+// 待加入function：
+// 1. 照片要傳到middleEnd
+// 2. 正面拍完要換背面
+
 import React, { useRef, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom"; 
 

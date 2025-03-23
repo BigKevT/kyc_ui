@@ -1,3 +1,8 @@
+// 待加入function：
+// 1. 照片要傳到middleEnd
+// 2. middleEnd回傳true/ false要可以終止這個IDFD流程
+// 3. 向上、向右流程
+
 import React, { useRef, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import CardHintTop from "../components/animation/CardHintTop";
@@ -160,6 +165,7 @@ const IDFD = ({ arg }) => {
         return () => clearInterval(interval);
     }, [isCapturing]);
 
+    //check all captured photos
     useEffect(() => {
         if (capturedPhotos.length === 10) {
             console.log("All captured photos:", capturedPhotos);
