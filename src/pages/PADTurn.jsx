@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import FaceAnimation from "../components/FaceAnimation";
+import TurningHead from "../components/animation/TurningHead";
 
 const PADTurn = () => {
     const videoRef = useRef(null);
@@ -17,16 +17,12 @@ const PADTurn = () => {
     const [progress, setProgress] = useState(0);
     const totalPhotos = 10;
     const captureDuration = 5000; 
-
+    
     //use the same UUID
     const location = useLocation();
     const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
 
-    //check UUID in console
-    useEffect(() => {
-        console.log(`UUID: ${userUUID}`);
-    }, []) 
-    
+    //Styles
     const styles = {
       container: {
         position: "fixed",
@@ -44,7 +40,7 @@ const PADTurn = () => {
       circleWrapperContainer: {
         position: "absolute",
         top: "35%",
-        transform: "translateY(-50%)", // Ensures proper centering
+        transform: "translateY(-50%)", 
         width: "310px",
         height: "310px",
         display: "flex",
@@ -55,7 +51,8 @@ const PADTurn = () => {
         position: "absolute",
         width: "320px",
         height: "320px",
-        transition: "stroke-dashoffset 0.5s linear", // Ensure smooth progress bar animation
+        transition: "stroke-dashoffset 0.5s linear",
+        zIndex: 2,
       },
       circleWrapper: {
         width: "300px",
@@ -67,12 +64,22 @@ const PADTurn = () => {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "white",
+        position: "relative",
+      },
+      circleBorderOverlay: {
+        position: "absolute",
+        width: "310px",
+        height: "310px",
+        borderRadius: "50%",
+        backgroundColor: "transparent",
+        zIndex: 3,
+        pointerEvents: "none",
       },
       video: {
         width: "100%",
         height: "100%",
         objectFit: "cover",
-        display: "block", // Ensure video shows immediately
+        display: "block",
       },
       animationWrapper: {
         position: "absolute",
@@ -81,6 +88,9 @@ const PADTurn = () => {
         display: showPreview ? "flex" : "none",
         justifyContent: "center",
         alignItems: "center",
+        overflow: "hidden",
+        clipPath: "ellipse(100% 50% at 50% 50%)", 
+        zIndex: 1,
       },
       hintTextContainer: {
         position: "absolute",
@@ -92,7 +102,8 @@ const PADTurn = () => {
         color: "black",
         fontSize: "1.5rem",
         lineHeight: "1.5",
-        padding: "15px"
+        padding: "15px",
+        whiteSpace: "pre-line",
       },
       startButtonContainer: {
         position: "absolute",
@@ -113,6 +124,12 @@ const PADTurn = () => {
         display: "none",
       },
     };
+
+    //check UUID in console
+    useEffect(() => {
+        console.log(`UUID: ${userUUID}`);
+    }, []) 
+
     
   useEffect(() => {
     return () => {
@@ -140,7 +157,7 @@ const PADTurn = () => {
       canvasRef.current.width = videoRef.current.videoWidth;
       canvasRef.current.height = videoRef.current.videoHeight;
       context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
-      console.log(`Captured photo ${count + 1}`);
+      console.log(`Captured photo ${count + 1}/10`);
     }
   };
 
@@ -188,8 +205,9 @@ const PADTurn = () => {
         </svg>
         <div style={styles.circleWrapper}>
           <video ref={videoRef} autoPlay playsInline style={styles.video} />
-          {showPreview && <div style={styles.animationWrapper}><FaceAnimation /></div>}
+          {showPreview && <div style={styles.animationWrapper}><TurningHead /></div>}
         </div>
+        <div style={styles.circleBorderOverlay}></div>
       </div>
 
       <div style={styles.startButtonContainer}>
@@ -201,3 +219,4 @@ const PADTurn = () => {
 };
 
 export default PADTurn;
+

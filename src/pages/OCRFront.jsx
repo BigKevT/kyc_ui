@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+
 const OCRFront = ({ arg }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -10,45 +11,7 @@ const OCRFront = ({ arg }) => {
   const location = useLocation();
   const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
 
-  //check UUID in console
-  useEffect(() => {
-    console.log(`UUID: ${userUUID}`);
-  }, []) 
-
-
-  useEffect(() => {
-    const startCamera = async () => {
-      try {
-        const userStream = await navigator.mediaDevices.getUserMedia({ 
-          video: { facingMode: "environment", width: { ideal: window.innerWidth }, height: { ideal: window.innerHeight } } 
-        });
-        videoRef.current.srcObject = userStream;
-        setStream(userStream);
-      } catch (err) {
-        console.error("Error accessing camera: ", err);
-      }
-    };
-
-    startCamera();
-    return () => {
-      if (stream) {
-        stream.getTracks().forEach(track => track.stop());
-      }
-    };
-  }, []);
-
-  const handleCapture = () => {
-    if (videoRef.current && canvasRef.current) {
-      const context = canvasRef.current.getContext("2d");
-      canvasRef.current.width = videoRef.current.videoWidth;
-      canvasRef.current.height = videoRef.current.videoHeight;
-      context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
-      
-      const imageDataUrl = canvasRef.current.toDataURL("image/png");
-      navigate("/OCRReview", { state: { image: imageDataUrl } });
-    }
-  };
-
+  //Styles
   const styles = {
     container : {
         position: "fixed",
@@ -97,7 +60,6 @@ const OCRFront = ({ arg }) => {
         fontSize: "0.9rem",
         lineHeight: "1.5"
       },
-
       button : {
         marginTop: "20px",
         backgroundColor: "white",
@@ -108,6 +70,56 @@ const OCRFront = ({ arg }) => {
       },
   };
 
+  //check UUID in console
+  useEffect(() => {
+    console.log(`UUID: ${userUUID}`);
+  }, []) 
+  
+  // useEffect(() => {
+  //   // Hide preview image after 1 second
+  //   const timer = setTimeout(() => {
+  //     setShowPreview(false);
+  //   }, 1000);
+      
+  //   return () => clearTimeout(timer);
+  // }, []);
+
+
+  useEffect(() => {
+    const startCamera = async () => {
+      try {
+        const userStream = await navigator.mediaDevices.getUserMedia({ 
+          video: { facingMode: "environment", width: { ideal: window.innerWidth }, height: { ideal: window.innerHeight } } 
+        });
+        videoRef.current.srcObject = userStream;
+        setStream(userStream);
+      } catch (err) {
+        console.error("Error accessing camera: ", err);
+      }
+    };
+
+    startCamera();
+    return () => {
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, []);
+
+  const handleCapture = () => {
+    if (videoRef.current && canvasRef.current) {
+      const context = canvasRef.current.getContext("2d");
+      canvasRef.current.width = videoRef.current.videoWidth;
+      canvasRef.current.height = videoRef.current.videoHeight;
+      context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
+      
+      const imageDataUrl = canvasRef.current.toDataURL("image/png");
+      navigate("/OCRReview", { state: { image: imageDataUrl } });
+    }
+  };
+
+  
+
   return (
     <div style={styles.container}>
       <div style={styles.hintTextAbove}>
@@ -117,6 +129,7 @@ const OCRFront = ({ arg }) => {
         <video ref={videoRef} autoPlay playsInline style={styles.video} />
       </div>
       
+
       {/* Hint Text Below Camera View */}
       <div style={styles.hintTextBelow}>
         <p>畫面模擬身分證 對準鏡頭</p>

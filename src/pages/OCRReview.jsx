@@ -8,11 +8,6 @@ const OCRReview = () => {
   //use the same UUID
   const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
   
-  //check UUID in console
-  useEffect(() => {
-    console.log(`UUID: ${userUUID}`);
-  }, []) 
-  
   const styles = {
     container: {
       position: "fixed",
@@ -65,6 +60,11 @@ const OCRReview = () => {
     }
   };
 
+    //check UUID in console
+    useEffect(() => {
+      console.log(`UUID: ${userUUID}`);
+    }, []) 
+
 
   return (
     <div style={styles.container}>
@@ -87,6 +87,9 @@ const OCRReview = () => {
         <button style={styles.buttonRetake} onClick={() => navigate(-1)}>重新拍攝</button>
         <button style={styles.buttonSend} onClick={() => {
           if (capturedImage) {
+
+            {/* 把圖傳到ekyc Backend Function 等待確認無反光後，才可進到IDFD流程 */}
+
             navigate("/IDFD");
           } else {
             alert("請先拍攝照片");

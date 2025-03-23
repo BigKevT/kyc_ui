@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import idcardpng from "../assets/idcard.png";
+import idcard from "../assets/img/idcard_front.svg";
 
 const StartPage = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const StartPage = () => {
     return storedUUID;
   });
   
-
+  //check UUID in console
   useEffect(() => {
     console.log(`UUID: ${userUUID}`);
   }, [])  
@@ -128,7 +128,7 @@ const StartPage = () => {
         
         <div style={styles.idCardImageContainer}>
           <img 
-            src={idcardpng}
+            src={idcard}
             alt="ID Card Illustration" 
             style={styles.idCardImage} 
           />

@@ -10,12 +10,14 @@ import OCRReview from './pages/OCRReview';
 import FVReview from './pages/FVReview';
 import Endpage from './pages/Endpage';
 import StartPage from './pages/Startpage';
+import Testing from './pages/Testing';
 
 function App() {
   return (
     <>
       <Routes>
         {/* Default route: Redirect to OCRFront or any page you want */}
+        {/* <Route path="/" element={<Navigate to="/Startpage" />} /> */}
         <Route path="/" element={<Navigate to="/Startpage" />} />
         <Route path="Startpage" element={<StartPage />} />
         <Route path="/OCRFront" element={<OCRFront />} />
@@ -26,6 +28,7 @@ function App() {
         <Route path="/PADTurn" element={<PADTurn />} />
         <Route path="/PADBlink" element={<PADBlink />} />
         <Route path="/Endpage" element={<Endpage />} />
+        <Route path="/Testing" element={<Testing />} />
       </Routes>
     </>
   );

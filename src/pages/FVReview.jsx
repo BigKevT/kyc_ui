@@ -8,11 +8,6 @@ const FVReview = () => {
     //use the same UUID
     const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
 
-    //check UUID in console
-    useEffect(() => {
-        console.log(`UUID: ${userUUID}`);
-    }, []) 
-
   const styles = {
     container: {
       position: "fixed",
@@ -83,6 +78,12 @@ const FVReview = () => {
       cursor: "pointer",
     },
   };
+
+  //check UUID in console
+  useEffect(() => {
+    console.log(`UUID: ${userUUID}`);
+  }, []) 
+
 
   return (
     <div style={styles.container}>

@@ -1,0 +1,29 @@
+<svg width="265" height="167" viewBox="0 0 265 167" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect opacity="0.6" x="0.5" y="0.5" width="264" height="166" rx="7.5" fill="white" stroke="#DDDDDD"/>
+<rect x="12.1342" y="10.8566" width="240.732" height="145.287" rx="5.5" fill="url(#paint0_linear_382_5031)" stroke="#DDDDDD"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M253.366 36.2481H11.6342V35.7481H253.366V36.2481Z" fill="#C1C1C1"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M253.366 56.9612H11.6342V56.4612H253.366V56.9612Z" fill="#C1C1C1"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M253.366 78.969H11.6342V78.469H253.366V78.969Z" fill="#C1C1C1"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M253.366 108.744H11.6342V108.244H253.366V108.744Z" fill="#C1C1C1"/>
+<rect opacity="0.49" x="20.6829" y="20.7132" width="10.3415" height="11.6512" fill="white"/>
+<rect opacity="0.49" x="20.6829" y="41.4264" width="28.439" height="11.6512" fill="white"/>
+<rect opacity="0.49" x="20.6829" y="62.1395" width="28.439" height="11.6512" fill="white"/>
+<rect opacity="0.49" x="20.6829" y="85.4419" width="28.439" height="11.6512" fill="white"/>
+<rect opacity="0.49" x="129.268" y="41.4264" width="24.561" height="11.6512" fill="white"/>
+<rect opacity="0.49" x="130.561" y="20.7132" width="10.3415" height="11.6512" fill="white"/>
+<rect opacity="0.49" x="58.1707" y="18.124" width="40.0732" height="14.2403" fill="white"/>
+<rect opacity="0.49" x="58.1707" y="38.8372" width="40.0732" height="15.5349" fill="white"/>
+<rect opacity="0.49" x="58.1707" y="60.845" width="40.0732" height="14.2403" fill="white"/>
+<rect opacity="0.49" x="20.6829" y="117.806" width="133.146" height="23.3023" fill="white"/>
+<rect opacity="0.49" x="58.1707" y="82.8527" width="98.2439" height="9.06202" fill="white"/>
+<rect opacity="0.49" x="58.1707" y="94.5039" width="133.146" height="9.06202" fill="white"/>
+<rect opacity="0.49" x="156.415" y="18.124" width="40.0732" height="14.2403" fill="white"/>
+<defs>
+<linearGradient id="paint0_linear_382_5031" x1="11.6342" y1="84.1252" x2="253.366" y2="84.1252" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FDEADB"/>
+<stop offset="0.34" stop-color="#E3D3E0"/>
+<stop offset="0.67954" stop-color="#E3D3E0"/>
+<stop offset="1" stop-color="#FDEADB"/>
+</linearGradient>
+</defs>
+</svg>

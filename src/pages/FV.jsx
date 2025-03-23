@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import placeholder from "../assets/placeholder.jpg";
+import placeholder from "../assets/img/img_face.svg";
+import RoundedButton from "../components/RoundedButton";
 
 const FV = () => {
     const videoRef = useRef(null);
@@ -12,20 +13,6 @@ const FV = () => {
     //use the same UUID
     const location = useLocation();
     const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
-
-    //check UUID in console
-    useEffect(() => {
-        console.log(`UUID: ${userUUID}`);
-    }, []) 
-
-    useEffect(() => {
-      // Hide preview image after 1 second
-      const timer = setTimeout(() => {
-        setShowPreview(false);
-      }, 1000);
-      
-      return () => clearTimeout(timer);
-    }, []);
 
     const styles = {
       container: {
@@ -73,8 +60,9 @@ const FV = () => {
         width: "100%",
         height: "100%",
         objectFit: "cover",
-        opacity: "0.6",
-        borderRadius: "50%"
+        opacity: "0.8",
+        borderRadius: "50%",
+        backgroundColor: "white"
       },
       hintTextContainer: {
         position: "absolute",
@@ -89,23 +77,46 @@ const FV = () => {
       },
       startButtonContainer: {
         position: "absolute",
-        bottom: "15%",
+        bottom: "5%",
         width: "100%",
         textAlign: "center",
       },
+      startButtonBorder : {
+        width: "60px",
+        height: "60px",
+        border: "solid",
+        borderColor: "FF6700",
+        backgroundColor: "rgba(0,0,0,0.5)"
+      },
       startButton: {
         padding: "10px 20px",
+        width: "58px",
+        height: "58px",
         fontSize: "1.2rem",
-        borderRadius: "5px",
-        backgroundColor: "orange",
-        color: "white",
-        border: "none",
+        border: "solid",
+        borderRadius: "50px",
+        backgroundColor: "#FF6700",
         cursor: "pointer",
       },
       hiddenCanvas: {
         display: "none",
       },
     };
+
+    //check UUID in console
+    useEffect(() => {
+        console.log(`UUID: ${userUUID}`);
+    }, []) 
+
+    useEffect(() => {
+      // Hide preview image after 2 second
+      const timer = setTimeout(() => {
+        setShowPreview(false);
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }, []);
+
     
   useEffect(() => {
     const startCamera = async () => {
@@ -171,9 +182,7 @@ const FV = () => {
 
       <div style={styles.startButtonContainer}>
         {!isCapturing && (
-          <button style={styles.startButton} onClick={startCapturing}>
-            拍攝照片
-          </button>
+          <button style={styles.startButton} onClick={startCapturing}></button>
         )}
       </div>
       
