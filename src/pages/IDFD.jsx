@@ -7,7 +7,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import CardHintTop from "../components/animation/CardHintTop";
 import HandFlipTop from "../components/animation/HandFlipTop";
-import TestingComponent from "../components/animation/testing";
 
 const IDFD = ({ arg }) => {
     const videoRef = useRef(null);
@@ -214,7 +213,7 @@ const IDFD = ({ arg }) => {
             
             <div>
                 {/* <div style={styles.animationWrapper}><HandFlipTop /></div> */}
-                <div style={styles.animationWrapper}><TestingComponent /></div>
+                <div style={styles.animationWrapper}><HandFlipTop /></div>
             </div>
 
             <div style={styles.startButtonContainer}>
