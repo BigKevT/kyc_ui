@@ -10,8 +10,7 @@ import PADBlink from './pages/PADBlink';
 // import FVReview from './pages/FVReview';
 import Endpage from './pages/Endpage';
 import StartPage from './pages/Startpage';
-import Testing from './pages/Testing';
-import BlinkEyes from './components/animation/BlinkEyes';
+
 
 function App() {
   return (
@@ -29,7 +28,7 @@ function App() {
         <Route path="/PADTurn" element={<PADTurn />} />
         <Route path="/PADBlink" element={<PADBlink />} />
         <Route path="/Endpage" element={<Endpage />} />
-        <Route path="/Testing" element={<Testing />} />
+        {/* <Route path="/Testing" element={<Testing />} /> */}
       </Routes>
     </>
   );
