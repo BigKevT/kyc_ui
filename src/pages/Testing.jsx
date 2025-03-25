@@ -1,13 +1,11 @@
-import React from "react";
-import BlinkEyes from "../components/animation/BlinkEyes";
+import React, { useRef, useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const Testing = () => {
-    return(
-        <div>
-            <BlinkEyes />
-        </div>
-    )
-}
+   return(
+    <p>testing</p>
+   )
+};
 
 export default Testing;

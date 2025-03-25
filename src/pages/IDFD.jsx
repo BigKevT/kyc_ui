@@ -7,6 +7,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import CardHintTop from "../components/animation/CardHintTop";
 import HandFlipTop from "../components/animation/HandFlipTop";
+import TestingComponent from "../components/animation/testing";
 
 const IDFD = ({ arg }) => {
     const videoRef = useRef(null);
@@ -38,7 +39,7 @@ const IDFD = ({ arg }) => {
             width: "90%",
             maxWidth: "500px",
             height: "30%",
-            border: "4px solid green",
+            border: "4px solid white",
             borderRadius: "10px",
             overflow: "hidden", 
             display: "flex",
@@ -85,15 +86,16 @@ const IDFD = ({ arg }) => {
             pointerEvents: isButtonDisabled ? "none" : "auto", // Disable clicks when disabled
         },
         animationWrapper: {
-            marginTop: "180px",
+            marginTop: isStarted ? "150px" : "180px",
             marginBottom: "30px",
             width: isStarted ? "150px" : "96vw",
-            height: isStarted ? "80px" : "280px",
+            height: isStarted ? "80px" : "250px",
+            maxWidth: "370px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             border: "5px dashed orange",
-            borderRadius: "10%"
+            borderRadius: "8%"
         }, 
     };
 
@@ -180,10 +182,10 @@ const IDFD = ({ arg }) => {
 
     return (
         isStarted ? (
-            //IDFD step 2
+            //IDFD step 2 向上翻轉
             <div style={styles.container}>
                 <div style={styles.hintTextContainer}>
-                    <p>請在框線中向{arg}翻轉您的身分證</p>
+                    <p>請在框線中 向{arg}翻轉您的身分證</p>
                 </div>
                 
                 <div style={styles.animationWrapper}>
@@ -203,7 +205,7 @@ const IDFD = ({ arg }) => {
                 </div>
             </div>
         ) : (
-            //IDFD step 1
+            //IDFD step 1 動畫說明
             <div style={styles.container}>
             <div style={styles.hintTextContainer}>
                 <p>請在框線中向{arg}翻轉您的身分證</p>
@@ -211,7 +213,8 @@ const IDFD = ({ arg }) => {
             
             
             <div>
-                <div style={styles.animationWrapper}><HandFlipTop /></div>
+                {/* <div style={styles.animationWrapper}><HandFlipTop /></div> */}
+                <div style={styles.animationWrapper}><TestingComponent /></div>
             </div>
 
             <div style={styles.startButtonContainer}>

@@ -1,3 +1,7 @@
+// 待加入function：
+// 1. 照片要傳到middleEnd
+// 2. middleEnd回傳true/ false要可以終止這個PAD流程
+
 import React, { useRef, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TurningHead from "../components/animation/TurningHead";
@@ -10,6 +14,7 @@ const PADTurn = () => {
     const [isCapturing, setIsCapturing] = useState(false);
     const [capturedPhotos, setCapturedPhotos] = useState([]);
     const [showPreview, setShowPreview] = useState(true);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [hintText, setHintText] = useState([
       "請完整地將您的臉放在圓框內",
       <br key="break" />,
@@ -23,7 +28,6 @@ const PADTurn = () => {
     const location = useLocation();
     const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
 
-    //Styles
     const styles = {
       container: {
         position: "fixed",
@@ -120,6 +124,7 @@ const PADTurn = () => {
         color: "white",
         border: "none",
         cursor: "pointer",
+        opacity: isButtonDisabled ? 0.5 : 1,
       },
       hiddenCanvas: {
         display: "none",
@@ -200,6 +205,13 @@ const PADTurn = () => {
      }
   }, [capturedPhotos]); 
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 3000); 
+  }, []);
+
+  
   return (
     <div style={styles.container}>
       <div style={styles.hintTextContainer}>

@@ -1,16 +1,23 @@
-// 待加入function：
-// 1. 照片要傳到middleEnd
-// 2. middleEnd回傳true/ false要可以終止這個Blink流程
-
-import React, { useRef, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import BlinkEyes from "../components/animation/BlinkEyes";
 
 const PADBlink = () => {
-    const navigate = useNavigate();
     const videoRef = useRef(null);
-    const [isStarted, setIsStarted] = useState(false);
+    const canvasRef = useRef(null);
+    const navigate = useNavigate();
+    const [stream, setStream] = useState(null);
+    const [isCapturing, setIsCapturing] = useState(false);
     const [capturedPhotos, setCapturedPhotos] = useState([]);
+    const [showPreview, setShowPreview] = useState(true);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [hintText, setHintText] = useState("請拉近手機與眼睛的距離");
+
+    const totalPhotos = 10;
+    const captureDuration = 5000; 
+
+    const location = useLocation();
+    const userUUID = location.state?.uuid || sessionStorage.getItem("userUUID");
 
     const styles = {
         container: {
@@ -19,12 +26,12 @@ const PADBlink = () => {
             left: 0,
             width: "100vw",
             height: "100vh",
-            backgroundColor: "#ffffff",
+            backgroundColor: "white",
+            overflow: "hidden",
             display: "flex",
             flexDirection: "column",
+            // justifyContent: "center",
             alignItems: "center",
-            textAlign: "center",
-            overflow: "hidden",
         },
         animationContainer: {
             position: "relative",
@@ -87,84 +94,115 @@ const PADBlink = () => {
             color: "white",
             border: "none",
             cursor: "pointer",
+            opacity: isButtonDisabled ? 0.5 : 1,
+            pointerEvents: isButtonDisabled ? "none" : "auto",
         },
     };
 
     useEffect(() => {
-        const startCamera = async () => {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                if (videoRef.current) {
-                    videoRef.current.srcObject = stream;
-                }
-            } catch (error) {
-                console.error("Error accessing camera: ", error);
-            }
-        };
-        if (isStarted) startCamera();
-    }, [isStarted]);
+        console.log(`UUID: ${userUUID}`);
+    }, []) 
 
     useEffect(() => {
-        if (!isStarted) return;
+        return () => {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+        };
+    }, [stream]);
+
+    const startCamera = async () => {
+        try {
+            const userStream = await navigator.mediaDevices.getUserMedia({ 
+                video: { facingMode: "user", width: { ideal: window.innerWidth }, height: { ideal: window.innerHeight } }
+            });
+            if (videoRef.current) {
+                videoRef.current.srcObject = userStream;
+            }
+            setStream(userStream);
+        } catch (err) {
+            console.error("Error accessing camera: ", err);
+        }
+    };
+
+    const capturePhoto = (count) => {
+        if (videoRef.current && canvasRef.current) {
+            const context = canvasRef.current.getContext("2d");
+            canvasRef.current.width = videoRef.current.videoWidth;
+            canvasRef.current.height = videoRef.current.videoHeight;
+            context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
+            const imageData = canvasRef.current.toDataURL("image/png");
+            setCapturedPhotos(prev => [...prev, imageData]);
+        }
+    };
+
+    const startCapturing = async () => {
+        setShowPreview(false);
+        setIsCapturing(true);
+
+        console.log("Starting camera...");
+        await startCamera();
+        console.log("Camera started and capturing in progress");
 
         let count = 0;
         const interval = setInterval(() => {
-            if (count < 10 && videoRef.current) {
-                const video = videoRef.current;
-                const canvas = document.createElement("canvas");
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                const ctx = canvas.getContext("2d");
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                const photo = canvas.toDataURL("image/png");
-                setCapturedPhotos(prev => [...prev, photo]);
+            if (count < totalPhotos) {
+                capturePhoto(count);
                 console.log(`Captured photo ${count + 1}/10`);
                 count++;
             } else {
                 clearInterval(interval);
-                console.log("all set");
-                navigate("/Endpage");
+                setHintText("拍攝完成");
+                setTimeout(() => {
+                    navigate("/endpage"); 
+                }, 1000);
             }
-        }, 1000);
+        }, captureDuration / totalPhotos);
+    };
 
-        return () => clearInterval(interval);
-    }, [isStarted]);
-
-    //check all captured photos
     useEffect(() => {
         if (capturedPhotos.length === 10) {
             console.log("All captured photos:", capturedPhotos);
         }
-    }, [capturedPhotos]);    
+    }, [capturedPhotos]); 
 
+    useEffect(() => {
+        setTimeout(() => {
+            setIsButtonDisabled(false);
+        }, 2000); 
+    }, []);
 
     const buttonAction = () => {
-        setIsStarted(true);
+        setShowPreview(false);
+        startCapturing();
     };
 
     return (
-        isStarted ? (
+        showPreview ? (
+            <div style={styles.container}>
+                <div style={styles.animationContainer}>
+                    <BlinkEyes />  
+                </div>
+                <div style={styles.hintText}>
+                    <p>{hintText}</p>
+                    <p>對著鏡頭慢眨眨眼</p>
+                    <p style={styles.smallText}>請移除口罩、帽子或墨鏡等任何遮住臉的物品</p>
+                </div>
+                <button style={styles.startButton} onClick={buttonAction}>換我試試看</button>
+            </div>
+        ) : (
             <div style={styles.container}>
                 <div style={styles.cameraContainer}>
                     <video ref={videoRef} autoPlay playsInline style={styles.cameraView} />
                 </div>
                 <div style={styles.hintText}>
-                    <p>請拉近手機與眼睛的距離</p>
-                    <p>對著鏡頭慢眨眨眼</p>
-                    <p style={styles.smallText}>請移除口罩、帽子或墨鏡等任何遮住臉的物品</p>
+                    <p>{hintText}</p>
+                    {hintText != "拍攝完成" && 
+                    <><p>對著鏡頭慢眨眨眼</p>
+                    <p style={styles.smallText}>請移除口罩、帽子或墨鏡等任何遮住臉的物品</p></>
+                    }
                 </div>
-            </div>
-        ) : (
-            <div style={styles.container}>
-                <div style={styles.animationContainer}>
-                    <BlinkEyes />   
-                </div>
-                <div style={styles.hintText}>
-                    <p>請拉近手機與眼睛的距離</p>
-                    <p>對著鏡頭慢眨眨眼</p>
-                    <p style={styles.smallText}>請移除口罩、帽子或墨鏡等任何遮住臉的物品</p>
-                </div>
-                <button style={styles.startButton} onClick={buttonAction}>換我試試看</button>
+                <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
             </div>
         )    
     );
