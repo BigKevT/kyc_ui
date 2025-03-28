@@ -4,7 +4,7 @@ import animationData from "../../assets/animation/card_right.json"; // Import yo
 
 const CardHintRight = () => {
   return (
-    <div style={{ width: 150, height: 150 }}> {/* Adjust size as needed */}
+    <div style={{ width: 100 }}> {/* Adjust size as needed */}
       <Lottie animationData={animationData} loop={true} />
     </div>
   );

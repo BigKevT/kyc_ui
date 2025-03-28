@@ -1,8 +1,8 @@
 import React from "react";
 import Lottie from "lottie-react";
-import animationData from "../../assets/animation/vertical.json"; // Import your Lottie JSON file
+import animationData from "../../assets/animation/horizontal.json"; // Import your Lottie JSON file
 
-const HandFlipTop = () => {
+const HandFlipRight = () => {
   return (
     <div style={{ width: 330 }}> {/* Adjust size as needed */}
       <Lottie animationData={animationData} loop={true} />
@@ -10,4 +10,4 @@ const HandFlipTop = () => {
   );
 };
 
-export default HandFlipTop;
+export default HandFlipRight;

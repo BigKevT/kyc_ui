@@ -10,6 +10,8 @@ import PADBlink from './pages/PADBlink';
 // import FVReview from './pages/FVReview';
 import Endpage from './pages/Endpage';
 import StartPage from './pages/Startpage';
+import Testing from './pages/Testing';
+import TestingIDFD from "./pages/TestingIDFD";
 
 
 function App() {
@@ -28,7 +30,8 @@ function App() {
         <Route path="/PADTurn" element={<PADTurn />} />
         <Route path="/PADBlink" element={<PADBlink />} />
         <Route path="/Endpage" element={<Endpage />} />
-        {/* <Route path="/Testing" element={<Testing />} /> */}
+        <Route path="/Testing" element={<Testing />} />
+        <Route path="/TestingIDFD" element={<TestingIDFD />} />
       </Routes>
     </>
   );

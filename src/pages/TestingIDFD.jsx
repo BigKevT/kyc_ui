@@ -11,7 +11,7 @@ import HandFlipTop from "../components/animation/HandFlipTop";
 import HandFlipRight from "../components/animation/HandFlipRight";
 import Spining from "../components/animation/Spining";
 
-const IDFD = () => {
+const TestingIDFD = () => {
     const videoRef = useRef(null);
     const [stream, setStream] = useState(null);
     const [capturedPhotos, setCapturedPhotos] = useState([]);
@@ -256,4 +256,4 @@ const IDFD = () => {
     );
 };
 
-export default IDFD;
+export default TestingIDFD;
